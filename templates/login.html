@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+    {% block content %}
+        <div>
+            <h2>Login</h2>
+        </div>
+        <div>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                
+                <div>
+                    {{ form.username.label }}
+                    <br>
+                    {% if form.username.errors %}
+                        {{ form.username }}
+                        <div>
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username }}
+                    {% endif %}
+                </div>
+
+                <div>
+                    {{ form.password.label }}
+                    <br>
+                    {% if form.password.errors %}
+                        {{ form.password }}
+                        <div>
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password }}
+                    {% endif %}
+                </div>
+
+                <br>
+                <div>
+                    <button type="submit" class="btn btn-primary">{{ form.submit.label.text }}</button>
+                </div>
+            </form>
+        </div>
+    {% endblock %}

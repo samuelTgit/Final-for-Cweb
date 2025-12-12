@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{{ legend }}Home{% endblock %}
+
+    {% block content %}
+        <div>
+            <h1>Blog</h1>
+            <br>
+            
+            {% if posts %}
+                {% for post in posts %}           
+                <div>
+                    <h3>
+                        <a href="{{ url_for('view_post', post_id=post.id) }}">
+                            <button type="button" class="btn btn-light">{{ post.title }}</button>
+                        </a>
+                        <br>
+                    </h3>
+                    <br>
+                    <p>
+                        {% if post.content|length > 200 %}
+                            {{ post.content[:200] }}
+                        {% else %}
+                            {{ post.content }}
+                        {% endif %}
+                    </p>
+                    <a href="{{ url_for('view_post', post_id=post.id) }}">
+                        <button type="button" class="btn btn-outline-success"><strong>More</strong></button>
+                    </a>
+                </div> 
+                <br>
+                <br>
+                <br>          
+                {% endfor %}
+            {% else %}
+                <div>
+                    <p>No posts yet.</p>
+                </div>
+            {% endif %}
+
+                        {% if current_user.is_authenticated %}
+                <div>
+                    <a href="{{ url_for('create_post') }}"><button type="button" class="btn btn-secondary">Create a post</button></a>
+                </div> 
+                <br>   
+            {% endif %}
+            
+        </div>
+    {% endblock %}
+

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{{ legend }} Make Posts {% endblock %}
+
+    {% block content %}
+    <h1>Creation page</h1>
+        <div>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+
+                
+                <div>
+                    {{ form.title.label }}
+                    <br>
+                    {% if form.title.errors %}
+                        {{ form.title }}
+                        <div>
+                            {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.title }}
+                    {% endif %}
+                </div>
+
+                <div>
+                    {{ form.content.label }}
+                    <br>
+                    {% if form.content.errors %}
+                        {{ form.content }}
+                        <div>
+                            {% for error in form.content.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.content }}
+                    {% endif %}
+                </div>
+                <br>
+                <div>
+                    <button type="submit" class="btn btn-primary">{{ form.submit.label.text }}</button><br><br>
+                    
+                    <a href="{{ url_for('index') }}"><button type="button" class="btn btn-warning">Cancel</button></a>
+                </div>
+            </form>
+
+        </div>
+    {% endblock %}
